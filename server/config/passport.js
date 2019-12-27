@@ -6,6 +6,8 @@ const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.JWT_SECRET;
 
+passport.use("jwt", new JwtStrategy(opts, (jwt_payload, done) => {}));
+
 passport.use(
   "google",
   new GoogleStrategy(
