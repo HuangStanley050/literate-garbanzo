@@ -1,5 +1,6 @@
 const express = require("express");
 const passport = require("passport");
+const AuthController = require("../controllers/auth");
 const router = express.Router();
 
 router
@@ -13,10 +14,7 @@ router
   .get(
     "/auth/google/callback",
     passport.authenticate("google", { session: false }),
-    (req, res) => {
-      console.log(req.user);
-      res.send("you have been authenticated");
-    }
+    AuthController.login
   );
 
 module.exports = router;

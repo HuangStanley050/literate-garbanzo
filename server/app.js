@@ -6,8 +6,7 @@ require("./config/passport");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(passport.initialize());
-app.use(passport.session());
+
 app.get("/", (req, res) => res.send("Hello"));
 app.use(authRouter);
 

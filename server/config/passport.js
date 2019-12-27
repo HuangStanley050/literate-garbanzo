@@ -1,5 +1,10 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const JwtStrategy = require("passport-jwt").Strategy;
+const ExtractJwt = require("passport-jwt").ExtractJwt;
+const opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = process.env.JWT_SECRET;
 
 passport.use(
   "google",
@@ -10,8 +15,11 @@ passport.use(
       callbackURL: `/auth/google/callback`
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
-      return done(null, profile);
+      const googleID = profile.id;
+      const email = profile.emails[0].value;
+      const name = profile.displayName;
+      const userInfo = { googleID, email, name };
+      return done(null, userInfo);
     }
   )
 );
