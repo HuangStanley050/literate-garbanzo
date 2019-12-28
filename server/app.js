@@ -14,5 +14,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.send("Hello"));
 app.use(authRouter);
+app.use(
+  "/secret",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.send("you passesd jwt");
+  }
+);
 
 module.exports = app;
