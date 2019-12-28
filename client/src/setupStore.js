@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { authReducer, dataReducer } from "./store/reducers";
+import rootSaga from "./store/sagas";
 
 const composeEnhancers =
   process.env.NODE_ENV === "development"
@@ -12,7 +13,11 @@ const rootReducer = combineReducers({
   data: dataReducer
   // error: errorReducer
 });
+const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware()));
-
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(sagaMiddleware))
+);
+sagaMiddleware.run(rootSaga);
 export default store;
