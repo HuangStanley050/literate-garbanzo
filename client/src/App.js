@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "./logo.svg";
 
 function App() {
+  useEffect(() => {
+    console.log(window.location.search);
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
