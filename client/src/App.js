@@ -1,21 +1,19 @@
 import React, { useEffect } from "react";
-import logo from "./logo.svg";
+import { Switch, Route } from "react-router-dom";
+import Landing from "./components/Landing";
+import Dashboard from "./components/Dashboard";
+import Header from "./components/Header";
+import SurveyNew from "./components/SurveyNew";
 
 function App() {
-  useEffect(() => {
-    console.log(window.location.search);
-  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a className="App-link" href="/auth/google" rel="noopener noreferrer">
-          Login with Google
-        </a>
-      </header>
+    <div>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/surveys" component={Dashboard} />
+        <Route path="/surveys/new" component={SurveyNew} />
+      </Switch>
     </div>
   );
 }
