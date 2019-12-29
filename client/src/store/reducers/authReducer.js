@@ -1,3 +1,4 @@
+import * as actionType from "../actions/actionTypes";
 const initialState = {
   isAuth: false,
   userInfo: {},
@@ -6,7 +7,17 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case actionType.LOGIN_OKAY:
+      //console.log(action.token);
+      localStorage.setItem("surveyApp", action.token);
+      return {
+        ...state,
+        isAuth: true
+      };
+    default:
+      return state;
+  }
 };
 
 export default reducer;
