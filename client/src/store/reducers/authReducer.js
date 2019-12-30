@@ -8,6 +8,12 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.LOGOUT:
+      return {
+        ...state,
+        isAuth: false,
+        userInfo: {}
+      };
     case actionType.LOGIN_OKAY:
       //console.log(action.token);
       localStorage.setItem("surveyApp", action.token);
