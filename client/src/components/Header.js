@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, withRouter } from "react-router-dom";
 import { logout } from "../store/actions/authActions";
 
 const useStyles = makeStyles(theme => ({
@@ -22,25 +22,22 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Header = ({ isAuth, logout }) => {
+const Header = ({ isAuth, logout, history }) => {
   const classes = useStyles();
   const LoginLinks = (
     <>
       <Button color="inherit" href="#">
-        Place Holder 1
+        Add Credits
       </Button>
       <Button color="inherit" href="#">
-        Place Holder 2
-      </Button>
-      <Button color="inherit" href="#">
-        Place Holder 3
+        Credits: 5
       </Button>
       <Button
         color="inherit"
-        href="#"
         onClick={() => {
           if (window.confirm("Are you logging out?")) {
             logout();
+            history.push("/");
           }
         }}
       >
@@ -80,7 +77,9 @@ const Header = ({ isAuth, logout }) => {
 const mapState = state => ({
   isAuth: state.auth.isAuth
 });
-export default connect(
-  mapState,
-  { logout }
-)(Header);
+export default withRouter(
+  connect(
+    mapState,
+    { logout }
+  )(Header)
+);

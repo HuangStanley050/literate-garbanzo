@@ -31,7 +31,5 @@ function App({ isAuth, dispatch, history }) {
 const mapState = state => ({
   isAuth: state.auth.isAuth
 });
-// const mapDispatch = dispatch => ({
-//   loginOkay: token => dispatch(loginOkay(token))
-// });
+
 export default withRouter(connect(mapState)(App));
