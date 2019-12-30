@@ -1,4 +1,5 @@
 import * as actionType from "../actions/actionTypes";
+import jwt_decode from "jwt-decode";
 const initialState = {
   isAuth: false,
   userInfo: {},
@@ -16,10 +17,16 @@ const reducer = (state = initialState, action) => {
       };
     case actionType.LOGIN_OKAY:
       //console.log(action.token);
+      const decoded = jwt_decode(action.token);
+      //console.log(decoded._doc);
       localStorage.setItem("surveyApp", action.token);
       return {
         ...state,
-        isAuth: true
+        isAuth: true,
+        userInfo: {
+          ...state.userInfo,
+          ...decoded._doc
+        }
       };
     default:
       return state;
