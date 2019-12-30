@@ -8,9 +8,8 @@ require("./config/passport");
 mongoose
   .connect(process.env.MONGO_URI, { useNewUrlParser: true })
   .then(() => console.log("connected to database"));
-
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get("/", (req, res) => res.send("Hello"));
 app.use(authRouter);

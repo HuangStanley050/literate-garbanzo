@@ -4,7 +4,7 @@ import backgroundIMG from "../assets/vacation.jpeg";
 const Landing = () => {
   const landingStyle = {
     backgroundImage: `url(${backgroundIMG})`,
-    minHeight: "100vh",
+    height: "90vh",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     display: "flex",
