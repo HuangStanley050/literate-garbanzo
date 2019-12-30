@@ -9,6 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import { Link as RouterLink, withRouter } from "react-router-dom";
 import { logout } from "../store/actions/authActions";
+import Payment from "./Payment";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,9 +27,8 @@ const Header = ({ isAuth, logout, history }) => {
   const classes = useStyles();
   const LoginLinks = (
     <>
-      <Button color="inherit" href="#">
-        Add Credits
-      </Button>
+      <Payment />
+
       <Button color="inherit" href="#">
         Credits: 5
       </Button>

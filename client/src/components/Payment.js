@@ -13,12 +13,13 @@ const Payment = props => {
       name="Survey App"
       amount={500}
       panelLabel="Make Payment"
+      label="Add Credit"
       currency="AUD"
       token={onToken}
-      stripeKey={process.env.REACT_APP_STRIPE_KEy}
+      stripeKey={process.env.REACT_APP_STRIPE_KEY}
     >
-      <Button variant="contained" color="primary">
-        Make Payment
+      <Button variant="contained" color="secondary">
+        Add Credit
       </Button>
     </StripeCheckout>
   );
