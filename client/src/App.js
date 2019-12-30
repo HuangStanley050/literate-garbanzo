@@ -8,15 +8,15 @@ import Dashboard from "./components/Dashboard";
 import Header from "./components/Header";
 import SurveyNew from "./components/SurveyNew";
 
-function App({ isAuth, loginOkay, history }) {
+function App({ isAuth, dispatch, history }) {
   useEffect(() => {
     if (window.location.search !== "" && !isAuth) {
       const urlParams = new URLSearchParams(window.location.search);
       const token = urlParams.get("jwt");
-      loginOkay(token);
+      dispatch(loginOkay(token));
       history.push("/surveys");
     }
-  }, [history, isAuth, loginOkay]);
+  }, [dispatch, history, isAuth]);
   return (
     <Container maxWidth="lg">
       <Header />
@@ -31,12 +31,7 @@ function App({ isAuth, loginOkay, history }) {
 const mapState = state => ({
   isAuth: state.auth.isAuth
 });
-const mapDispatch = dispatch => ({
-  loginOkay: token => dispatch(loginOkay(token))
-});
-export default withRouter(
-  connect(
-    mapState,
-    mapDispatch
-  )(App)
-);
+// const mapDispatch = dispatch => ({
+//   loginOkay: token => dispatch(loginOkay(token))
+// });
+export default withRouter(connect(mapState)(App));

@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -20,9 +21,29 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Header = () => {
+const Header = ({ isAuth }) => {
   const classes = useStyles();
-
+  const LoginLinks = (
+    <>
+      <Button color="inherit" href="#">
+        Place Holder 1
+      </Button>
+      <Button color="inherit" href="#">
+        Place Holder 2
+      </Button>
+      <Button color="inherit" href="#">
+        Place Holder 3
+      </Button>
+      <Button color="inherit" href="#">
+        Log out
+      </Button>
+    </>
+  );
+  const LogoutLink = (
+    <Button color="inherit" href="/auth/google">
+      Login with Google
+    </Button>
+  );
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -41,13 +62,13 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             SurveyApp
           </Typography>
-          <Button color="inherit" href="/auth/google">
-            Login with Google
-          </Button>
+          {isAuth ? LoginLinks : LogoutLink}
         </Toolbar>
       </AppBar>
     </div>
   );
 };
-
-export default Header;
+const mapState = state => ({
+  isAuth: state.auth.isAuth
+});
+export default connect(mapState)(Header);
