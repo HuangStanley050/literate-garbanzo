@@ -1,13 +1,17 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const User = require("../models/User");
 
 exports.charge = async (req, res, next) => {
   const accountId = req.body.id;
+  const userInfo = req.user;
+  let user = await User.findOne({ _id: userInfo._doc._id });
   let result = await stripe.charges.create({
     amount: 500,
     currency: "aud",
     source: accountId,
     description: "$5 for a credit"
   });
-  console.log(result);
-  res.send("payment controller");
+  user.credits++;
+  const updatedUser = await user.save();
+  return res.status(200).send({ message: "payment successful", updatedUser });
 };
