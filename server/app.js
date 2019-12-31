@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require("passport");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/auth");
+const paymentRouter = require("./routes/payment");
 const app = express();
 require("./config/passport");
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.get("/", (req, res) => res.send("Hello"));
 app.use(authRouter);
+app.use(paymentRouter);
 app.use(
   "/secret",
   passport.authenticate("jwt", { session: false }),
