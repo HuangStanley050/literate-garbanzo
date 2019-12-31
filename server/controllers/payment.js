@@ -14,5 +14,6 @@ stripe.charges.create({
  */
 
 exports.charge = (req, res, next) => {
+  console.log(req.body);
   res.send("payment controller");
 };

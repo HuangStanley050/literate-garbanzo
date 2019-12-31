@@ -5,7 +5,7 @@ const paymentController = require("../controllers/payment");
 
 router.post(
   "/api/stripe",
-  //passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   paymentController.charge
 );
 
