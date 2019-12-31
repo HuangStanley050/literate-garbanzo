@@ -28,7 +28,6 @@ const Header = ({ isAuth, logout, history }) => {
   const LoginLinks = (
     <>
       <Payment />
-
       <Button color="inherit" href="#">
         Credits: 5
       </Button>
