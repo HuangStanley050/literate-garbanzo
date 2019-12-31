@@ -1,11 +1,13 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
+import { makePayment } from "../store/actions/billingActions";
 import axios from "axios";
 
-const Payment = props => {
-  const onToken = async token => {
-    console.log(token);
+const Payment = ({ dispatch }) => {
+  const onToken = token => {
+    dispatch(makePayment(token));
   };
   return (
     <StripeCheckout
@@ -18,11 +20,15 @@ const Payment = props => {
       token={onToken}
       stripeKey={process.env.REACT_APP_STRIPE_KEY}
     >
-      <Button variant="contained" color="secondary">
+      <Button
+        onClick={() => makePayment("stuff")}
+        variant="contained"
+        color="secondary"
+      >
         Add Credit
       </Button>
     </StripeCheckout>
   );
 };
 
-export default Payment;
+export default connect()(Payment);

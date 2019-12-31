@@ -9,6 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import { Link as RouterLink, withRouter } from "react-router-dom";
 import { logout } from "../store/actions/authActions";
+
 import Payment from "./Payment";
 
 const useStyles = makeStyles(theme => ({
