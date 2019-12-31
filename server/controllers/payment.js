@@ -1,19 +1,13 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-/*
-
-stripe.charges.create({
-  amount: 1000,
-  currency: "aud",
-  source: "tok_visa",
-}, {
-  stripe_account: "{{CONNECTED_STRIPE_ACCOUNT_ID}}",
-}).then(function(charge) {
-  // asynchronously called
-});
- */
-
-exports.charge = (req, res, next) => {
-  console.log(req.body);
+exports.charge = async (req, res, next) => {
+  const accountId = req.body.id;
+  let result = await stripe.charges.create({
+    amount: 500,
+    currency: "aud",
+    source: accountId,
+    description: "$5 for a credit"
+  });
+  console.log(result);
   res.send("payment controller");
 };
