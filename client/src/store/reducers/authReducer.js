@@ -27,14 +27,14 @@ const reducer = (state = initialState, action) => {
     case actionType.LOGIN_OKAY:
       //console.log(action.token);
       const decoded = jwt_decode(action.token);
-      //console.log(decoded._doc);
+      //console.log(decoded);
       localStorage.setItem("surveyApp", action.token);
       return {
         ...state,
         isAuth: true,
         userInfo: {
           ...state.userInfo,
-          ...decoded._doc
+          ...decoded
         }
       };
     default:

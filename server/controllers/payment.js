@@ -4,7 +4,7 @@ const User = require("../models/User");
 exports.charge = async (req, res, next) => {
   const accountId = req.body.id;
   const userInfo = req.user;
-  let user = await User.findOne({ _id: userInfo._doc._id });
+  let user = await User.findOne({ googleID: userInfo.googleID });
   let result = await stripe.charges.create({
     amount: 500,
     currency: "aud",
