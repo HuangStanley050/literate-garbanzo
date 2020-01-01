@@ -4,6 +4,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/auth");
 const paymentRouter = require("./routes/payment");
+const surveyRouter = require("./routes/survey");
 const app = express();
 require("./config/passport");
 
