@@ -1,5 +1,5 @@
 const express = require("express");
-const passport = require("passport");
+//const passport = require("passport");
 const path = require("path");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/auth");
@@ -18,13 +18,14 @@ app.use(express.static(path.join(__dirname, "client/build")));
 app.get("/", (req, res) => res.send("Hello"));
 app.use(authRouter);
 app.use(paymentRouter);
-app.use(
-  "/secret",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    res.send("you passesd jwt");
-  }
-);
+app.use(surveyRouter);
+// app.use(
+//   "/secret",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res) => {
+//     res.send("you passesd jwt");
+//   }
+// );
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
