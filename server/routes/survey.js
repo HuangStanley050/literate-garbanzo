@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 const surveyController = require("../controllers/survey");
+const Middleware = require("../middlewares");
 
 router
   .get("/api/surveys", surveyController.fetchSurveys)
@@ -9,6 +10,7 @@ router
   .post(
     "/api/surveys",
     passport.authenticate("jwt", { session: false }),
+    Middleware.checkCredit,
     surveyController.createSurvey
   );
 
