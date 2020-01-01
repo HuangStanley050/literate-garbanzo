@@ -9,6 +9,15 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.MAKE_PAYMENT_OKAY:
+      console.log(action.info);
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          ...action.info
+        }
+      };
     case actionType.LOGOUT:
       return {
         ...state,

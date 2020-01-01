@@ -15,7 +15,8 @@ function* billingSagaWorker(action) {
       url: API.payment,
       data: token
     });
-    console.log(result.data);
+    //console.log(result.data);
+    yield put(paymentOkay(result.data.updatedUser));
   } catch (err) {
     console.log(err);
   }

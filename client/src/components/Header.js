@@ -24,13 +24,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Header = ({ isAuth, logout, history }) => {
+const Header = ({ isAuth, logout, history, credits }) => {
   const classes = useStyles();
   const LoginLinks = (
     <>
       <Payment />
       <Button color="inherit" href="#">
-        Credits: 5
+        Credits: {credits}
       </Button>
       <Button
         color="inherit"
@@ -75,7 +75,8 @@ const Header = ({ isAuth, logout, history }) => {
   );
 };
 const mapState = state => ({
-  isAuth: state.auth.isAuth
+  isAuth: state.auth.isAuth,
+  credits: state.auth.userInfo.credits
 });
 export default withRouter(
   connect(
