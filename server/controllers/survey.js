@@ -9,7 +9,7 @@ exports.createSurvey = async (req, res, next) => {
     subject,
     body,
     dateSent: Date.now(),
-    recipients: recipients.split(",").map(email => ({ email })),
+    recipients: recipients.split(",").map(email => ({ email: email.trim() })),
     user: id
   });
   const user = await User.findOne({ _id: id });
