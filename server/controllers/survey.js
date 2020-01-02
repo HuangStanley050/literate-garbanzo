@@ -3,6 +3,9 @@ const Mailer = require("../config/Mailer");
 const surveyTemplate = require("../config/emailTemplates");
 const User = require("../models/User");
 
+exports.feedBack = (req, res) => {
+  return res.send("Thank you for your feedback");
+};
 exports.fetchSurveys = (req, res, next) => {};
 exports.createSurvey = async (req, res, next) => {
   const { id } = req.user;
@@ -17,9 +20,9 @@ exports.createSurvey = async (req, res, next) => {
     user: id
   });
   const mailer = new Mailer(newSurvey, surveyTemplate(newSurvey));
-  const response = await mailer.send();
 
   try {
+    const response = await mailer.send();
     user = await User.findOne({ _id: id });
     const surveyResult = await newSurvey.save();
     user.surveys = [...user.surveys, surveyResult._id];
@@ -28,6 +31,7 @@ exports.createSurvey = async (req, res, next) => {
     return res.status(200).send({ message: "Survey created and sent", user });
   } catch (err) {
     console.log(err);
+    return res.status(422).send(err);
   }
 };
 exports.webHook = (req, res, next) => {};
