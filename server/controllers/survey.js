@@ -6,6 +6,7 @@ const User = require("../models/User");
 exports.fetchSurveys = (req, res, next) => {};
 exports.createSurvey = async (req, res, next) => {
   const { id } = req.user;
+  let user;
   const { title, subject, body, recipients } = req.body;
   const newSurvey = new Survey({
     title,
@@ -17,11 +18,16 @@ exports.createSurvey = async (req, res, next) => {
   });
   const mailer = new Mailer(newSurvey, surveyTemplate(newSurvey));
   const response = await mailer.send();
-  console.log(response);
-  // const user = await User.findOne({ _id: id });
-  // const surveyResult = await newSurvey.save();
-  // user.surveys = [...user.surveys, surveyResult._id];
-  // await user.save();
-  res.send("this is create survey route");
+
+  try {
+    user = await User.findOne({ _id: id });
+    const surveyResult = await newSurvey.save();
+    user.surveys = [...user.surveys, surveyResult._id];
+    user.credits--;
+    user = await user.save();
+    return res.status(200).send({ message: "Survey created and sent", user });
+  } catch (err) {
+    console.log(err);
+  }
 };
 exports.webHook = (req, res, next) => {};
