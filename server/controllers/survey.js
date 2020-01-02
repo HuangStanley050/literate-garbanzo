@@ -15,11 +15,13 @@ exports.createSurvey = async (req, res, next) => {
     recipients: recipients.split(",").map(email => ({ email: email.trim() })),
     user: id
   });
-  const mailer = new Mailer(survey, surveyTemplate(survey));
+  const mailer = new Mailer(newSurvey, surveyTemplate(newSurvey));
+  const response = await mailer.send();
+  console.log(response);
   // const user = await User.findOne({ _id: id });
   // const surveyResult = await newSurvey.save();
   // user.surveys = [...user.surveys, surveyResult._id];
   // await user.save();
-  // res.send("this is create survey route");
+  res.send("this is create survey route");
 };
 exports.webHook = (req, res, next) => {};
