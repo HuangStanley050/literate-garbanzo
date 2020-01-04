@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
 import { authReducer, dataReducer } from "./store/reducers";
+import { reducer as formReducer } from "redux-form";
 import rootSaga from "./store/sagas";
 
 const composeEnhancers =
@@ -10,7 +11,8 @@ const composeEnhancers =
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  data: dataReducer
+  data: dataReducer,
+  form: formReducer
   // error: errorReducer
 });
 const sagaMiddleware = createSagaMiddleware();
