@@ -5,7 +5,7 @@ import SurveyField from "./SurveyField";
 
 const validate = values => {
   const errors = {};
-  const requiredFields = ["Title", "Subject", "Body", "favoriteColor", "notes"];
+  const requiredFields = ["Title", "Subject", "Body", "Recipients"];
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = "Required";
@@ -23,7 +23,10 @@ const validate = values => {
 const SurveyForm = props => {
   const { handleSubmit } = props;
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      style={{ textAlign: "center", marginTop: "3rem" }}
+      onSubmit={handleSubmit}
+    >
       <div>
         <Field
           name="Subject"
@@ -43,9 +46,22 @@ const SurveyForm = props => {
           label="Question"
         />
       </div>
+      <div>
+        <Field
+          name="Recipients"
+          type="text"
+          component={SurveyField}
+          label="Recipients emails"
+        />
+      </div>
 
       <div>
-        <Button type="submit" variant="contained" color="primary">
+        <Button
+          style={{ marginTop: "2rem" }}
+          type="submit"
+          variant="contained"
+          color="primary"
+        >
           Create
         </Button>
       </div>

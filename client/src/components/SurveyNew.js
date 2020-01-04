@@ -8,8 +8,8 @@ const SurveyNew = () => {
   const prevPage = () => setPage(currentPage - 1);
   return (
     <div>
-      <SurveyForm />
-      <SurveyFormReview />
+      {currentPage === 1 && <SurveyForm onSubmit={nextPage} />}
+      {currentPage === 2 && <SurveyFormReview prevPage={prevPage} />}
     </div>
   );
 };
