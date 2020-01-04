@@ -20,6 +20,13 @@ const validate = values => {
   return errors;
 };
 
+const FIELDS = [
+  { label: "Subject", name: "subject" },
+  { label: "Title", name: "title" },
+  { label: "Question", name: "body" },
+  { label: "Recipients emails", name: "recipients" }
+];
+
 const SurveyForm = props => {
   const { handleSubmit } = props;
   return (
@@ -27,34 +34,18 @@ const SurveyForm = props => {
       style={{ textAlign: "center", marginTop: "3rem" }}
       onSubmit={handleSubmit}
     >
-      <div>
-        <Field
-          name="Subject"
-          type="text"
-          component={SurveyField}
-          label="Subject"
-        />
-      </div>
-      <div>
-        <Field name="Title" type="text" component={SurveyField} label="Title" />
-      </div>
-      <div>
-        <Field
-          name="Body"
-          type="text"
-          component={SurveyField}
-          label="Question"
-        />
-      </div>
-      <div>
-        <Field
-          name="Recipients"
-          type="text"
-          component={SurveyField}
-          label="Recipients emails"
-        />
-      </div>
-
+      {FIELDS.map((field, index) => {
+        return (
+          <div key={index}>
+            <Field
+              name={field.name}
+              label={field.label}
+              type="text"
+              component={SurveyField}
+            />
+          </div>
+        );
+      })}
       <div>
         <Button
           style={{ marginTop: "2rem" }}
