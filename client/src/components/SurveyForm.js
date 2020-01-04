@@ -28,7 +28,7 @@ const SurveyForm = props => {
 };
 
 export default reduxForm({
-  form: "wizard", // <------ same form name
+  form: "surveyForm", // <------ same form name
   destroyOnUnmount: false, // <------ preserve form data
   forceUnregisterOnUnmount: true // <------ unregister fields on unmount
 })(SurveyForm);

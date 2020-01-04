@@ -2,9 +2,10 @@ const Survey = require("../models/Survey");
 const Mailer = require("../config/Mailer");
 const surveyTemplate = require("../config/emailTemplates");
 const User = require("../models/User");
+const path = require("path");
 
 exports.feedBack = (req, res) => {
-  return res.send("Thank you for your feedback");
+  return res.sendFile(path.join(__dirname, "../ThankYou.html"));
 };
 exports.fetchSurveys = (req, res, next) => {};
 exports.createSurvey = async (req, res, next) => {
