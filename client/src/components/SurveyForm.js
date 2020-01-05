@@ -1,5 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import { Link as RouterLink } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import SurveyField from "./SurveyField";
 
@@ -47,7 +48,13 @@ const SurveyForm = props => {
           </div>
         );
       })}
-      <div>
+      <div
+        style={{
+          margin: "0 auto",
+          display: "flex",
+          justifyContent: "space-around"
+        }}
+      >
         <Button
           style={{ marginTop: "2rem" }}
           type="submit"
@@ -55,6 +62,15 @@ const SurveyForm = props => {
           color="primary"
         >
           Create
+        </Button>
+        <Button
+          style={{ marginTop: "2rem" }}
+          component={RouterLink}
+          to="/surveys"
+          variant="contained"
+          color="secondary"
+        >
+          Cancel
         </Button>
       </div>
     </form>
