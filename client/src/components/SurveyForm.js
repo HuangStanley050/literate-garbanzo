@@ -70,8 +70,6 @@ const validateEmails = emails => {
     .filter(email => re.test(email) === false);
 
   if (invalidEmails.length) {
-    console.log("invalid emails");
-    console.log(invalidEmails);
     return `These emails are invalid: ${invalidEmails} `;
   }
   return null;
