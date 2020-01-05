@@ -5,7 +5,7 @@ import SurveyField from "./SurveyField";
 
 const validate = values => {
   const errors = {};
-  const requiredFields = ["Title", "Subject", "Body", "Recipients"];
+  const requiredFields = ["title", "subject", "body", "recipients"];
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = "Required";
@@ -31,13 +31,14 @@ const SurveyForm = props => {
   const { handleSubmit } = props;
   return (
     <form
-      style={{ textAlign: "center", marginTop: "3rem" }}
+      style={{ textAlign: "center", margin: "3rem auto", width: "80%" }}
       onSubmit={handleSubmit}
     >
       {FIELDS.map((field, index) => {
         return (
           <div key={index}>
             <Field
+              style={{ width: "100%" }}
               name={field.name}
               label={field.label}
               type="text"

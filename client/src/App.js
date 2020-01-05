@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginOkay } from "./store/actions/authActions";
+import PrivateRoute from "./components/PrivateRoute";
 import Container from "@material-ui/core/Container";
 import Landing from "./components/Landing";
 import Dashboard from "./components/Dashboard";
@@ -22,8 +23,8 @@ function App({ isAuth, dispatch, history }) {
       <Header />
       <Switch>
         <Route exact path="/" component={Landing} />
-        <Route exact path="/surveys" component={Dashboard} />
-        <Route path="/surveys/new" component={SurveyNew} />
+        <PrivateRoute exact path="/surveys" component={Dashboard} />
+        <PrivateRoute path="/surveys/new" component={SurveyNew} />
       </Switch>
     </Container>
   );
