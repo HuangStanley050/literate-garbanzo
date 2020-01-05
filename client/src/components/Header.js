@@ -29,9 +29,7 @@ const Header = ({ isAuth, logout, history, credits }) => {
   const LoginLinks = (
     <>
       <Payment />
-      <Button color="inherit" href="#">
-        Credits: {credits}
-      </Button>
+      <Button color="inherit">Credits: {credits}</Button>
       <Button
         color="inherit"
         onClick={() => {

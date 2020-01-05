@@ -4,23 +4,6 @@ import { Link as RouterLink } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import SurveyField from "./SurveyField";
 
-const validate = values => {
-  const errors = {};
-  const requiredFields = ["title", "subject", "body", "recipients"];
-  requiredFields.forEach(field => {
-    if (!values[field]) {
-      errors[field] = "Required";
-    }
-  });
-  if (
-    values.email &&
-    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-  ) {
-    errors.email = "Invalid email address";
-  }
-  return errors;
-};
-
 const FIELDS = [
   { label: "Subject", name: "subject" },
   { label: "Title", name: "title" },
@@ -75,6 +58,36 @@ const SurveyForm = props => {
       </div>
     </form>
   );
+};
+
+const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+const validateEmails = emails => {
+  //console.log("i am running");
+  const invalidEmails = emails
+    .split(",")
+    .map(email => email.trim())
+    .filter(email => re.test(email) === false);
+
+  if (invalidEmails.length) {
+    console.log("invalid emails");
+    console.log(invalidEmails);
+    return `These emails are invalid: ${invalidEmails} `;
+  }
+  return null;
+};
+
+const validate = values => {
+  const errors = {};
+  errors.recipients = validateEmails(values.recipients || "");
+  const requiredFields = ["title", "subject", "body", "recipients"];
+  requiredFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = "Required";
+    }
+  });
+  //console.log(errors);
+  return errors;
 };
 
 export default reduxForm({
