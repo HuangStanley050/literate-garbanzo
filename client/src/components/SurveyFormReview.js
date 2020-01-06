@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import EmailIcon from "@material-ui/icons/Email";
 import { reduxForm, getFormValues, Field } from "redux-form";
 import { connect } from "react-redux";
 import SurveyField from "./SurveyField";
@@ -35,7 +36,12 @@ let Review = props => {
         <Button onClick={props.prevPage} variant="contained" color="primary">
           Go back
         </Button>
-        <Button onClick={props.onSubmit} variant="contained" color="secondary">
+        <Button
+          startIcon={<EmailIcon />}
+          onClick={props.onSubmit}
+          variant="contained"
+          color="secondary"
+        >
           Send Survey
         </Button>
       </div>
