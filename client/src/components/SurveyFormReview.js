@@ -8,29 +8,37 @@ let Review = props => {
   const formFields = Object.keys(props.values);
 
   return (
-    <div>
+    <div style={{ textAlign: "center", width: "80%", margin: "3rem auto" }}>
       <h1>Review</h1>
-      <div>
-        {formFields.map((field, index) => {
-          return (
-            <div key={index}>
-              <Field
-                style={{ width: "100%" }}
-                name={field}
-                label={field}
-                type="text"
-                component={SurveyField}
-              />
-            </div>
-          );
-        })}
+
+      {formFields.map((field, index) => {
+        return (
+          <div key={index}>
+            <Field
+              disabled
+              style={{ width: "100%" }}
+              name={field}
+              label={field}
+              type="text"
+              component={SurveyField}
+            />
+          </div>
+        );
+      })}
+      <div
+        style={{
+          margin: "2rem auto",
+          display: "flex",
+          justifyContent: "space-around"
+        }}
+      >
+        <Button onClick={props.prevPage} variant="contained" color="primary">
+          Go back
+        </Button>
+        <Button onClick={props.onSubmit} variant="contained" color="secondary">
+          Send Survey
+        </Button>
       </div>
-      <Button onClick={props.prevPage} variant="contained" color="primary">
-        Go back
-      </Button>
-      <Button onClick={props.onSubmit} variant="contained" color="secondary">
-        Send Survey
-      </Button>
     </div>
   );
 };

@@ -18,6 +18,7 @@ const SurveyForm = props => {
       style={{ textAlign: "center", margin: "3rem auto", width: "80%" }}
       onSubmit={handleSubmit}
     >
+      <h1>Create your survey</h1>
       {FIELDS.map((field, index) => {
         return (
           <div key={index}>
