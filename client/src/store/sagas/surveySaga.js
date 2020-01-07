@@ -5,8 +5,8 @@ import axios from "axios";
 import API from "../../api";
 
 function* surveySagaWorker(action) {
-  yield console.log("survey start sending");
-  yield console.log(action);
+  // yield console.log("survey start sending");
+  // yield console.log(action);
   const token = yield localStorage.getItem("surveyApp");
   let result;
   try {
@@ -17,6 +17,7 @@ function* surveySagaWorker(action) {
       data: action.values
     });
     console.log(result.data);
+    yield put(sendSurveyOkay(result.data.user));
   } catch (err) {
     console.log(err);
     yield put(sendSurveyFail(err));

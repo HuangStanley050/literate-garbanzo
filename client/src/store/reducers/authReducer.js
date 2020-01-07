@@ -9,6 +9,17 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.SUBMIT_SURVEY_START:
+      return {
+        ...state,
+        loading: true
+      };
+    case actionType.SUBMIT_SURVEY_OKAY:
+      return {
+        ...state,
+        loading: false,
+        userInfo: { ...action.response }
+      };
     case actionType.MAKE_PAYMENT_OKAY:
       console.log(action.info);
       return {
