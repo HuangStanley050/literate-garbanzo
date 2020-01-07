@@ -3,11 +3,16 @@ import Button from "@material-ui/core/Button";
 import EmailIcon from "@material-ui/icons/Email";
 import { reduxForm, getFormValues, Field } from "redux-form";
 import { connect } from "react-redux";
+import { sendSurvey } from "../store/actions/surveyActions";
 import SurveyField from "./SurveyField";
 
 let Review = props => {
   const formFields = Object.keys(props.values);
-
+  const handleSubmit = () => {
+    console.log("submitting");
+    console.log(props.values);
+    props.dispatch(sendSurvey(props.values));
+  };
   return (
     <div style={{ textAlign: "center", width: "80%", margin: "3rem auto" }}>
       <h1>Review</h1>
@@ -38,7 +43,7 @@ let Review = props => {
         </Button>
         <Button
           startIcon={<EmailIcon />}
-          onClick={props.onSubmit}
+          onClick={handleSubmit}
           variant="contained"
           color="secondary"
         >
