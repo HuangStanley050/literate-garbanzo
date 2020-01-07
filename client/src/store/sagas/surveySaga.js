@@ -14,10 +14,11 @@ function* surveySagaWorker(action) {
       headers: { Authorization: `bearer ${token}` },
       method: "post",
       url: API.sendSurvey,
-      data: action.values
+      data: action.payload.values
     });
     console.log(result.data);
     yield put(sendSurveyOkay(result.data.user));
+    action.payload.history.push("/surveys");
   } catch (err) {
     console.log(err);
     yield put(sendSurveyFail(err));

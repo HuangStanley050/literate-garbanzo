@@ -1,8 +1,8 @@
 import * as actionType from "./actionTypes";
 
-export const sendSurvey = values => ({
+export const sendSurvey = (values, history) => ({
   type: actionType.SUBMIT_SURVEY_START,
-  values
+  payload: { values, history }
 });
 
 export const sendSurveyOkay = response => ({
