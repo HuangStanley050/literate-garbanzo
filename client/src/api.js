@@ -1,3 +1,4 @@
 export default {
-  payment: "/api/stripe"
+  payment: "/api/stripe",
+  sendSurvey: "/api/surveys"
 };

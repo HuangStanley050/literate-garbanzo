@@ -9,8 +9,8 @@ import SurveyField from "./SurveyField";
 let Review = props => {
   const formFields = Object.keys(props.values);
   const handleSubmit = () => {
-    console.log("submitting");
-    console.log(props.values);
+    // console.log("submitting");
+    // console.log(props.values);
     props.dispatch(sendSurvey(props.values));
   };
   return (

@@ -1,7 +1,7 @@
 import { all } from "redux-saga/effects";
 import billingSaga from "./billingSaga";
-import dataSaga from "./dataSaga";
+import surveySaga from "./surveySaga";
 
 export default function* rootSaga() {
-  yield all([billingSaga(), dataSaga()]);
+  yield all([billingSaga(), surveySaga()]);
 }
