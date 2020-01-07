@@ -5,6 +5,7 @@ import { reduxForm, getFormValues, Field } from "redux-form";
 import { connect } from "react-redux";
 import { sendSurvey } from "../store/actions/surveyActions";
 import SurveyField from "./SurveyField";
+import Loader from "./Loader";
 
 let Review = props => {
   const formFields = Object.keys(props.values);
@@ -50,12 +51,14 @@ let Review = props => {
           Send Survey
         </Button>
       </div>
+      {props.loading ? <Loader /> : null}
     </div>
   );
 };
 
 Review = connect(state => ({
-  values: getFormValues("surveyForm")(state)
+  values: getFormValues("surveyForm")(state),
+  loading: state.auth.loading
 }))(Review);
 
 export default reduxForm({

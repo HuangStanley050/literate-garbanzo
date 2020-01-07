@@ -1,7 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import backgroundIMG from "../assets/vacation.jpeg";
 
-const Landing = () => {
+const Landing = props => {
   const landingStyle = {
     backgroundImage: `url(${backgroundIMG})`,
     height: "90vh",
@@ -11,6 +13,9 @@ const Landing = () => {
     justifyContent: "center",
     alignItems: "center"
   };
+  if (props.isAuth) {
+    return <Redirect to="/surveys" />;
+  }
   return (
     <div style={landingStyle}>
       <div>
@@ -22,5 +27,7 @@ const Landing = () => {
     </div>
   );
 };
-
-export default Landing;
+const mapState = state => ({
+  isAuth: state.auth.isAuth
+});
+export default connect(mapState)(Landing);
