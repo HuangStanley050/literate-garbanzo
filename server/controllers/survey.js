@@ -39,17 +39,21 @@ exports.createSurvey = async (req, res, next) => {
   }
 };
 exports.webHook = async (req, res, next) => {
-  const events = _.map(req.body, ({ email, url }) => {
-    const pathname = new URL(url).pathname;
-    const p = new Path("/api/surveys/:surveyId/:answer");
-    const match = p.test(pathname);
-    if (match) {
-      return {
-        email,
-        surveyId: match.surveyId,
-        answer: match.answer
-      };
-    }
-  });
+  const p = new Path("/api/surveys/:surveyId/:answer");
+  const events = _.chain(req.body)
+    .map(({ email, url }) => {
+      const match = p.test(new URL(url).pathname);
+      if (match) {
+        return {
+          email,
+          surveyId: match.surveyId,
+          answer: match.answer
+        };
+      }
+    })
+    .compact()
+    .uniqBy("email", "surveyId")
+    .value();
   console.log(events);
+  res.send("hi");
 };
