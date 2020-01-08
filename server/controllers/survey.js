@@ -1,5 +1,8 @@
 const Survey = require("../models/Survey");
 const Mailer = require("../config/Mailer");
+const _ = require("lodash");
+const { URL } = require("url");
+const { Path } = require("path-parser");
 const surveyTemplate = require("../config/emailTemplates");
 const User = require("../models/User");
 const path = require("path");
@@ -36,6 +39,17 @@ exports.createSurvey = async (req, res, next) => {
   }
 };
 exports.webHook = async (req, res, next) => {
-  console.log(req.body);
-  return res.send({});
+  const events = _.map(req.body, ({ email, url }) => {
+    const pathname = new URL(url).pathname;
+    const p = new Path("/api/surveys/:surveyId/:answer");
+    const match = p.test(pathname);
+    if (match) {
+      return {
+        email,
+        surveyId: match.surveyId,
+        answer: match.answer
+      };
+    }
+  });
+  console.log(events);
 };
