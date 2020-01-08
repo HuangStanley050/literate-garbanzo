@@ -40,7 +40,7 @@ exports.createSurvey = async (req, res, next) => {
 };
 exports.webHook = async (req, res, next) => {
   const p = new Path("/api/surveys/:surveyId/:answer");
-  const events = _.chain(req.body)
+  _.chain(req.body)
     .map(({ email, url }) => {
       const match = p.test(new URL(url).pathname);
       if (match) {
@@ -53,22 +53,24 @@ exports.webHook = async (req, res, next) => {
     })
     .compact()
     .uniqBy("email", "surveyId")
-    .value();
-  console.log(events);
-  Survey.updateOne(
-    {
-      _id: surveyId,
-      recipients: {
-        $elemMatch: {
-          email: email,
-          responded: false
+    .each(({ surveyId, email, answer }) => {
+      Survey.updateOne(
+        {
+          _id: surveyId,
+          recipients: {
+            $elemMatch: {
+              email: email,
+              responded: false
+            }
+          }
+        },
+        {
+          $inc: { [answer]: 1 },
+          $set: { "recipients.$.responded": true }
         }
-      }
-    },
-    {
-      $inc: { [answer]: 1 },
-      $set: { "recipients.$.responded": true }
-    }
-  );
+      ).exec();
+    })
+    .value();
+
   res.send("hi");
 };
