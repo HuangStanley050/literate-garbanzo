@@ -55,5 +55,20 @@ exports.webHook = async (req, res, next) => {
     .uniqBy("email", "surveyId")
     .value();
   console.log(events);
+  Survey.updateOne(
+    {
+      _id: surveyId,
+      recipients: {
+        $elemMatch: {
+          email: email,
+          responded: false
+        }
+      }
+    },
+    {
+      $inc: { [answer]: 1 },
+      $set: { "recipients.$.responded": true }
+    }
+  );
   res.send("hi");
 };
