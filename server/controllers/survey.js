@@ -35,4 +35,7 @@ exports.createSurvey = async (req, res, next) => {
     return res.status(422).send(err);
   }
 };
-exports.webHook = (req, res, next) => {};
+exports.webHook = async (req, res, next) => {
+  console.log(req.body);
+  return res.send({});
+};

@@ -5,7 +5,7 @@ const surveyController = require("../controllers/survey");
 const Middleware = require("../middlewares");
 
 router
-  .get("/api/thankyou", surveyController.feedBack)
+  .get("/api/surveys/:surveyId/:answer", surveyController.feedBack)
   .get("/api/surveys", surveyController.fetchSurveys)
   .post("/api/surveys/webhooks", surveyController.webHook)
   .post(
