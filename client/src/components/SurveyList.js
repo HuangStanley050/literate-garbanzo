@@ -38,7 +38,7 @@ const SurveyList = ({ surveys }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {surveys.map(survey => (
+            {surveys.reverse().map(survey => (
               <TableRow key={survey._id}>
                 <TableCell align="right" component="th" scope="row">
                   {survey.title}
