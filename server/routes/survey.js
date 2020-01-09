@@ -6,7 +6,11 @@ const Middleware = require("../middlewares");
 
 router
   .get("/api/surveys/:surveyId/:answer", surveyController.feedBack)
-  .get("/api/surveys", surveyController.fetchSurveys)
+  .get(
+    "/api/surveys",
+    passport.authenticate("jwt", { session: false }),
+    surveyController.fetchSurveys
+  )
   .post("/api/surveys/webhooks", surveyController.webHook)
   .post(
     "/api/surveys",

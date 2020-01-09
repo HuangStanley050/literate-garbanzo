@@ -10,7 +10,11 @@ const path = require("path");
 exports.feedBack = (req, res) => {
   return res.sendFile(path.join(__dirname, "../ThankYou.html"));
 };
-exports.fetchSurveys = (req, res, next) => {};
+exports.fetchSurveys = async (req, res, next) => {
+  const { id } = req.user;
+  let surveys = await Survey.find({ user: id }).select({ recipients: 0 });
+  return res.status(200).send({ msg: "surveys", surveys });
+};
 exports.createSurvey = async (req, res, next) => {
   const { id } = req.user;
   let user;
@@ -66,7 +70,8 @@ exports.webHook = async (req, res, next) => {
         },
         {
           $inc: { [answer]: 1 },
-          $set: { "recipients.$.responded": true }
+          $set: { "recipients.$.responded": true },
+          lastResponded: new Date()
         }
       ).exec();
     })
