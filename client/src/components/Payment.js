@@ -17,7 +17,7 @@ const Payment = ({ dispatch }) => {
       label="Add Credit"
       currency="AUD"
       token={onToken}
-      stripeKey={process.env.REACT_APP_STRIPE_KEY}
+      stripeKey={"pk_test_rOnIUC7hbo7ElO2ZOTW2mbDZ	"}
     >
       <Button
         onClick={() => makePayment("stuff")}
