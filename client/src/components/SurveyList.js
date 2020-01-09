@@ -29,7 +29,8 @@ const SurveyList = ({ surveys }) => {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Survey Title</TableCell>
+              <TableCell align="right">Survey Title</TableCell>
+              <TableCell align="right">Sent on</TableCell>
               <TableCell align="right">Subject</TableCell>
               <TableCell align="right">Question</TableCell>
               <TableCell align="right">Yes</TableCell>
@@ -39,8 +40,11 @@ const SurveyList = ({ surveys }) => {
           <TableBody>
             {surveys.map(survey => (
               <TableRow key={survey._id}>
-                <TableCell component="th" scope="row">
+                <TableCell align="right" component="th" scope="row">
                   {survey.title}
+                </TableCell>
+                <TableCell align="right">
+                  {new Date(survey.dateSent).toLocaleDateString()}
                 </TableCell>
                 <TableCell align="right">{survey.subject}</TableCell>
                 <TableCell align="right">{survey.body}</TableCell>
