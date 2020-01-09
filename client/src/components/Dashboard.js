@@ -4,8 +4,9 @@ import Fab from "@material-ui/core/Fab";
 import { connect } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { fetchSurvey } from "../store/actions/surveyActions";
+import SurveyList from "./SurveyList";
 
-const Dashboard = ({ credits, dispatch }) => {
+const Dashboard = ({ credits, dispatch, surveys }) => {
   const fabStyle = {
     margin: 0,
     top: "auto",
@@ -19,6 +20,7 @@ const Dashboard = ({ credits, dispatch }) => {
   }, [dispatch]);
   return (
     <div style={{ position: "relative", minHeight: "90vh" }}>
+      <SurveyList surveys={surveys} />
       <Fab
         disabled={credits <= 0}
         size="large"
@@ -34,6 +36,7 @@ const Dashboard = ({ credits, dispatch }) => {
   );
 };
 const mapState = state => ({
-  credits: state.auth.userInfo.credits
+  credits: state.auth.userInfo.credits,
+  surveys: state.data.data
 });
 export default connect(mapState)(Dashboard);

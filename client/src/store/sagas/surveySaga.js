@@ -39,7 +39,7 @@ function* fetchSurveyWorker(action) {
       method: "get",
       url: API.fetchSurvey
     });
-    console.log(result.data);
+    //console.log(result.data);
     yield put(fetchSurveyOkay(result.data.surveys));
   } catch (err) {
     console.log(err);
