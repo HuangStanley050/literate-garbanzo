@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import { connect } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
+import { fetchSurvey } from "../store/actions/surveyActions";
 
-const Dashboard = ({ credits }) => {
+const Dashboard = ({ credits, dispatch }) => {
   const fabStyle = {
     margin: 0,
     top: "auto",
@@ -13,6 +14,9 @@ const Dashboard = ({ credits }) => {
     left: "auto",
     position: "absolute"
   };
+  useEffect(() => {
+    dispatch(fetchSurvey());
+  }, [dispatch]);
   return (
     <div style={{ position: "relative", minHeight: "90vh" }}>
       <Fab

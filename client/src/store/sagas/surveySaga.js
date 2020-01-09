@@ -1,6 +1,11 @@
 import * as actionType from "../actions/actionTypes";
 import { takeEvery, put } from "redux-saga/effects";
-import { sendSurveyOkay, sendSurveyFail } from "../actions/surveyActions";
+import {
+  sendSurveyOkay,
+  sendSurveyFail,
+  fetchSurveyOkay,
+  fetchSurveyFail
+} from "../actions/surveyActions";
 import axios from "axios";
 import API from "../../api";
 
@@ -16,7 +21,7 @@ function* surveySagaWorker(action) {
       url: API.sendSurvey,
       data: action.payload.values
     });
-    console.log(result.data);
+    //console.log(result.data);
     yield put(sendSurveyOkay(result.data.user));
     action.payload.history.push("/surveys");
   } catch (err) {
@@ -25,6 +30,23 @@ function* surveySagaWorker(action) {
   }
 }
 
+function* fetchSurveyWorker(action) {
+  const token = yield localStorage.getItem("surveyApp");
+  let result;
+  try {
+    result = yield axios({
+      headers: { Authorization: `bearer ${token}` },
+      method: "get",
+      url: API.fetchSurvey
+    });
+    console.log(result.data);
+  } catch (err) {
+    console.log(err);
+    yield put(fetchSurveyFail(err));
+  }
+}
+
 export default function* surveySagaWatcher() {
   yield takeEvery(actionType.SUBMIT_SURVEY_START, surveySagaWorker);
+  yield takeEvery(actionType.FETCH_SURVEYS_START, fetchSurveyWorker);
 }
