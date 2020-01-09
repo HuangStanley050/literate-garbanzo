@@ -20,7 +20,7 @@ app.use(paymentRouter);
 app.use(surveyRouter);
 
 app.get("*", (req, res) => {
-  res.sendFile("/client/build/index.html");
+  res.sendFile("/client/build/index.html", { root: __dirname });
 });
 
 module.exports = app;
