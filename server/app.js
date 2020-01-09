@@ -15,7 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "client/build")));
 
-app.get("/", (req, res) => res.send("Hello"));
 app.use(authRouter);
 app.use(paymentRouter);
 app.use(surveyRouter);
