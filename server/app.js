@@ -13,14 +13,15 @@ mongoose
   .then(() => console.log("connected to database"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "client/build")));
+
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 app.use(authRouter);
 app.use(paymentRouter);
 app.use(surveyRouter);
 
 app.get("*", (req, res) => {
-  res.sendFile("/client/build/index.html", { root: __dirname });
+  res.sendFile(path.join(__dirname + "../client/build/index.html"));
 });
 
 module.exports = app;
