@@ -7,5 +7,5 @@ exports.login = (req, res, next) => {
   const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
   //console.log(token);
   //res.send({ message: "Authenticated", token });
-  res.redirect("/?jwt=${token}");
+  res.redirect(`/?jwt=${token}`);
 };
